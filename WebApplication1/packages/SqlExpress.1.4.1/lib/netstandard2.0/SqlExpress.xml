@@ -1,0 +1,525 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SqlExpress</name>
+    </assembly>
+    <members>
+        <member name="T:SqlExpress.NotNullAttribute">
+            <summary>
+            Flags the property not to be stored with a null value.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.PrimaryKeyAttribute">
+            <summary>
+            Flags the property as a Primary Key, don't use this if you inherit from SQLObject.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.StoreAttribute">
+            <summary>
+            Makes this property to be stored. Priority orders the colums from highest priority to lowest
+            </summary>
+        </member>
+        <member name="M:SqlExpress.StoreAttribute.#ctor(System.Byte)">
+            <summary>
+            Sets the priority of the property. Ordered by descending.
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="T:SqlExpress.VarcharAttribute">
+            <summary>
+            You should only use this attribute with properties of type String. You can set any value between 1 and 8000 or -1 for VARCHAR(MAX)
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="P:SqlExpress.VarcharAttribute.Length">
+            <summary>
+            Represents the length of the string that will be stored in the database.
+            </summary>
+        </member>
+        <member name="M:SqlExpress.VarcharAttribute.#ctor(System.Int16)">
+            <summary>
+            The default length is 50, you can only set a value between 1 and 8000. Or -1 for VARCHAR(MAX)
+            </summary>
+            <param name="length"></param>
+        </member>
+        <member name="T:SqlExpress.SqlConfiguration">
+            <summary>
+            This is the configuration object to properly set up the client. This class can be Serialized/Deserialized with JSON and XML.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlConfiguration.ConnectionString">
+            <summary>
+            Sets the connection string used to log in the database.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlConfiguration.LoggingEnable">
+            <summary>
+            Enables logging after objects are Created, Loaded, Updated and Removed.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlConfiguration.UseCache">
+            <summary>
+            Enables the use of Cache to improve performance at the slight cost of ram memory.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlConfiguration.DbProvider">
+            <summary>
+            Sets the default database provider for this wrapper. Only MSSQL and PostreSQL supported.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlConfiguration.StringLimit">
+            <summary>
+            Sets the length limit of VARCHAR, from 1 to 8000 or -1 for VARCHAR(MAX)
+            </summary>
+        </member>
+        <member name="T:SqlExpress.SqlObject">
+            <summary>
+            All classes that inherit this object will be stored without major problems. It's strongly recommended to inherit this object instead of implementing the interface to avoid issues.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlObject.Id">
+            <summary>
+            Sets the Id of the object. Used as a Primary Key for querying.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlObject.TableName">
+            <summary>
+            Sets the name of the object. This name is used to create a table in the database.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.SqlResult">
+            <summary>
+            You will get this result from Log event. It contains the data you may need for logging purposes.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlResult.Obj">
+            <summary>
+            This is the resulting object of the method called.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlResult.Successful">
+            <summary>
+            This indicates is the method ran successfully.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlResult.LogSource">
+            <summary>
+            This is the source from where the event was fired.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlResult.Summary">
+            <summary>
+            A brief summary of what happened.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlResult.Exception">
+            <summary>
+            This is the exception thrown if any. Keep in mind that Successful could be False without exception. For example, if you attempt to create an object that already exists, Successful will be False but Exception will be null.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.DbLogSource">
+            <summary>
+            This enumerable defines the type of the event that is being logged.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbLogSource.Create">
+            <summary>
+            This indicates a new object has been Created.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbLogSource.Load">
+            <summary>
+            This indicates a new object has been Loaded.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbLogSource.Remove">
+            <summary>
+            This indicates a new object has been Removed.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbLogSource.Update">
+            <summary>
+            This indicates a new object has been Updated.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.DbProvider">
+            <summary>
+            This enumerable defines the database provider that will be used for this wrapper.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbProvider.MSSQL">
+            <summary>
+            This indicates that MSSQL will be used.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbProvider.PostgreSQL">
+            <summary>
+            This indicates that PostgreSQL will be used.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbProvider.SQLite">
+            <summary>
+            This indicates that SQLite will be used.
+            </summary>
+        </member>
+        <member name="F:SqlExpress.DbProvider.MySQL">
+            <summary>
+            This indicates that MySQL will be used.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.SqlExpressClient">
+            <summary>
+            This is the client that will wrap SqlClient and provide you ease with your needs. Strongly recommended to add a Singleton of this class.
+            </summary>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CreateObject``1(``0)">
+            <summary>
+            Adds a new Object to the database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CreateObjectAsync``1(``0)">
+            <summary>
+            Adds a new Object to the database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+            <exception cref="T:SqlExpress.EmptyObjectException"></exception>
+            <exception cref="T:SqlExpress.NullPropertyException"></exception>
+            <exception cref="T:SqlExpress.UnsupportedTypeException"></exception>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.LoadObject``1(``0)">
+            <summary>
+            Loads the Object, creates a new one if it doesn't exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.LoadObject``1(System.UInt64)">
+            <summary>
+            Loads the Object, creates a new one if it doesn't exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.LoadObject``1(System.UInt64,``0@)">
+            <summary>
+            Loads the Object, creates a new one if it doesn't exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <param name="obj"></param>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.LoadObjectAsync``1(``0)">
+            <summary>
+            Loads the Object, creates a new one if it doesn't exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+            <exception cref="T:SqlExpress.EmptyObjectException"></exception>
+            <exception cref="T:SqlExpress.NullPropertyException"></exception>
+            <exception cref="T:SqlExpress.UnsupportedTypeException"></exception>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.LoadObjectAsync``1(System.UInt64)">
+            <summary>
+            Loads the Object, creates a new one if it doesn't exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:SqlExpress.EmptyObjectException"></exception>
+            <exception cref="T:SqlExpress.NullPropertyException"></exception>
+            <exception cref="T:SqlExpress.UnsupportedTypeException"></exception>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.UpdateObject``1(``0)">
+            <summary>
+            Updates the Object, creates a new one if it doesn't exist.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.UpdateObjectAsync``1(``0)">
+            <summary>
+            Updates the Object, creates a new one if it doesn't exist.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+            <exception cref="T:SqlExpress.EmptyObjectException"></exception>
+            <exception cref="T:SqlExpress.NullPropertyException"></exception>
+            <exception cref="T:SqlExpress.UnsupportedTypeException"></exception>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.RemoveObject``1(``0)">
+            <summary>
+            Removes the Object if exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.RemoveObject``1(System.UInt64)">
+            <summary>
+            Removes the Object if exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.RemoveObjectAsync``1(``0)">
+            <summary>
+            Removes the Object if exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.RemoveObjectAsync``1(System.UInt64)">
+            <summary>
+            Removes the Object if exists
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendQuery(System.String)">
+            <summary>
+            Executes the query and returns a string with the resulting table.
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendQueryAsync(System.String)">
+            <summary>
+            Executes the query and returns a string with the resulting table.
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendNonQuery(System.Data.Common.DbCommand)">
+            <summary>
+            Executes a Non-Query and returns the amount of rows affected.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendNonQuery(System.String)">
+            <summary>
+            Executes a Non-Query and returns the amount of rows affected.
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendNonQueryAsync(System.Data.Common.DbCommand)">
+            <summary>
+            Executes a Non-Query and returns the amount of rows affected.
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendNonQueryAsync(System.String)">
+            <summary>
+            Executes a Non-Query and returns the amount of rows affected.
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendScalar``1(System.String)">
+            <summary>
+            Sends a query to the database and returns the first value retrieved of the type provided. Returns null if cast fails.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendScalar``1(System.Data.Common.DbCommand)">
+            <summary>
+            Sends a query to the database and returns the first value retrieved of the type provided. Returns null if cast fails.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendScalarAsync``1(System.String)">
+            <summary>
+            Sends a query to the database and returns the first value retrieved of the type provided. Returns null if cast fails.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.SendScalarAsync``1(System.Data.Common.DbCommand)">
+            <summary>
+            Sends a query to the database and returns the first value retrieved of the type provided. Returns null if cast fails.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.YieldData``1(System.String)">
+            <summary>
+            Yields the data of the resulting column into an IEnumerable, if there are other rows they will be ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.YieldData``1(System.String,System.Data.Common.DbConnection)">
+            <summary>
+            Yields the data of the resulting column into an IEnumerable, if there are other rows they will be ignored.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CheckExistence``1(``0)">
+            <summary>
+            Checks if the obj provided exists in the database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CheckExistence``1(``0,System.Data.Common.DbConnection)">
+            <summary>
+            Checks if the obj provided exists in the database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CheckExistence``1(System.UInt64)">
+            <summary>
+            Checks if an IStorableObject exists in the database provided the Id.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CheckExistenceAsync``1(``0)">
+            <summary>
+            Checks if the obj provided exists in the database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CheckExistenceAsync``1(``0,System.Data.Common.DbConnection)">
+            <summary>
+            Checks if the obj provided exists in the database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.CheckExistenceAsync``1(System.UInt64)">
+            <summary>
+            Checks if an IStorableObject exists in the database provided the Id.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="E:SqlExpress.SqlExpressClient.Log">
+            <summary>
+            If enabled, this event will be fired whenever an object is Created, Loaded, Removed or Updated.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlExpressClient.Configuration">
+            <summary>
+            This is the configuration object to properly set up the client. SqlConfig is (De)Serializable with Json and XML.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.SqlExpressClient.Cache">
+            <summary>
+            This is the internal cache being used to improve the performance. You can disable it and handle it yourself if you want though.
+            </summary>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.#ctor">
+            <summary>
+            This is the public ctor to prevent issues with DependencyInjection
+            </summary>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.#ctor(SqlExpress.SqlConfiguration)">
+            <summary>
+            This is the public ctor you should use to properly set up the client.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.InitializeObjectsAsync(System.Reflection.Assembly[])">
+            <summary>
+            This is the Objects initialization, it will automatically create the objects that don't exists.
+            </summary>
+            <param name="assemblies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.InitializeObjectAsync``1(``0)">
+            <summary>
+            This is the Object initialization, it will automatically create the object if it doesn't exist.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.LoadObjectsCacheAsync(System.Reflection.Assembly[])">
+            <summary>
+            Loads the cache with all objects stored in the database of the type provided.
+            </summary>
+            <param name="assemblies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SqlExpress.SqlExpressClient.LoadObjectCacheAsync``1(``0)">
+            <summary>
+            Loads the cache with the provided object from the database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SqlExpress.CacheDisabledException">
+            <summary>
+            This Exception is thrown when the object doesn't have any property with Store Attribute.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.EmptyObjectException">
+            <summary>
+            This Exception is thrown when the object doesn't have any property with Store Attribute.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.InvalidNameException">
+            <summary>
+            This Exception is throw when your property flagged with NotNullAttribute has a Null value.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.NullPropertyException">
+            <summary>
+            This Exception is throw when your property flagged with NotNullAttribute has a Null value.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.UnsupportedTypeException">
+            <summary>
+            This Exception is thrown when you attempt to store an object with an unsupported type.
+            </summary>
+        </member>
+        <member name="T:SqlExpress.IStorableObject">
+            <summary>
+            All objects must implement this interface in order to be stored in the database.
+            </summary>
+        </member>
+        <member name="P:SqlExpress.IStorableObject.Id">
+            <summary>
+            This is the unique-id of the object commonly used as Primary Key
+            </summary>
+        </member>
+        <member name="P:SqlExpress.IStorableObject.TableName">
+            <summary>
+            This is the name of the table where the object will be stored.
+            </summary>
+        </member>
+    </members>
+</doc>
