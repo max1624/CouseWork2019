@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tour_id" Type="int" Nullable="false" />
     <Property Name="user_email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="user_phone" Type="smallint" Nullable="false" />
@@ -14,7 +14,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="country" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
@@ -26,7 +26,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="hotel_id" Type="int" Nullable="false" />
     <Property Name="departure_city" Type="varchar" MaxLength="50" Nullable="false" />
@@ -39,7 +39,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="second_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />

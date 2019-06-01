@@ -25,12 +25,17 @@ namespace WebApplication1.Controllers
                 {
                     ViewBag.DuplicateMessage = "User with this e-mail already exists";
                 }
-                newUser.role_id = 3;
-                db.Users.Add(newUser);
-                db.SaveChanges();
+                else
+                {
+                    newUser.role_id = 3;
+                    db.Users.Add(newUser);
+                    db.SaveChanges();
+                    ModelState.Clear();
+                    ViewBag.SuccessMessage = "Registration successfull";
+                }
+
             }
-            ModelState.Clear();
-            ViewBag.SuccessMessage = "Registration successfull";
+
             return View("Register", new Users());
         }
 

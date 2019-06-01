@@ -16,6 +16,7 @@ namespace WebApplication1.Models
 
     public partial class Users
     {
+        
         public long Id { get; set; }
 
         [DisplayName("First name")]

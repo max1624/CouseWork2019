@@ -3,6 +3,11 @@
     ViewBag.Title = "Create Tour";
 }
 
+@if( Session["role_id"] == null || Session["role_id"].ToString() != "1")
+{
+    throw new HttpException(404, "Not found");
+}
+
 <h2>Create Tour</h2>
 
 @using (Html.BeginForm("CreateTour", "Tours", FormMethod.Post))
