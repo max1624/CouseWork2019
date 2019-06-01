@@ -11,16 +11,39 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel;
+
     public partial class Tours
     {
         public int Id { get; set; }
+
+        [DisplayName("Name")]
+        [Required(ErrorMessage = "This field is required")]
         public string name { get; set; }
+
+        [DisplayName("Hotel id")]
+        [Required(ErrorMessage = "This field is required")]
         public int hotel_id { get; set; }
+
+        [DisplayName("Departure city")]
+        [Required(ErrorMessage = "This field is required")]
         public string departure_city { get; set; }
+
+        [DisplayName("Start date")]
+        [Required(ErrorMessage = "This field is required")]
         public System.DateTime start_date { get; set; }
+
+        [DisplayName("Expiration date")]
+        [Required(ErrorMessage = "This field is required")]
         public System.DateTime expiration_date { get; set; }
+
+        [DisplayName("Price")]
+        [Required(ErrorMessage = "This field is required")]
         public short price { get; set; }
+
+        [DisplayName("Description")]
+        [Required(ErrorMessage = "This field is required")]
         public string description { get; set; }
     }
 }

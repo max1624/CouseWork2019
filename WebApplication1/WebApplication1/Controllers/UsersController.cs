@@ -25,6 +25,7 @@ namespace WebApplication1.Controllers
                 {
                     ViewBag.DuplicateMessage = "User with this e-mail already exists";
                 }
+                newUser.role_id = 3;
                 db.Users.Add(newUser);
                 db.SaveChanges();
             }
@@ -49,6 +50,7 @@ namespace WebApplication1.Controllers
                 if (user != null)
                 {
                     Session["userId"] = user.Id;
+                    Session["role_id"] = user.role_id;
                     return RedirectToAction("Index", "Home");
                 }
                 else
