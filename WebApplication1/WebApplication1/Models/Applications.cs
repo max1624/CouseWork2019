@@ -11,13 +11,22 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Applications
     {
         public long Id { get; set; }
         public int tour_id { get; set; }
+
+        [DisplayName("E-mail")]
+        [Required(ErrorMessage = "This field is required")]
         public string user_email { get; set; }
+
+        [DisplayName("Phone number")]
+        [Required(ErrorMessage = "This field is required")]
         public short user_phone { get; set; }
+
         public System.DateTime order_date { get; set; }
     }
 }

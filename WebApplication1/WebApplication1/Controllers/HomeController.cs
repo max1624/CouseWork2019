@@ -13,6 +13,7 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             var tours = db.Tours.ToList();
+            tours.Reverse();
             return View(tours);
         }
 

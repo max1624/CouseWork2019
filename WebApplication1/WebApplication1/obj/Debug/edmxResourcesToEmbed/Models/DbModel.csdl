@@ -34,6 +34,7 @@
     <Property Name="expiration_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="price" Type="Int16" Nullable="false" />
     <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="img_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

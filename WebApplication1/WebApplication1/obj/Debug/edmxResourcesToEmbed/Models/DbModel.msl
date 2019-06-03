@@ -28,6 +28,7 @@
     <EntitySetMapping Name="Tours">
       <EntityTypeMapping TypeName="TourAgencyModel.Tours">
         <MappingFragment StoreEntitySet="Tours">
+          <ScalarProperty Name="img_path" ColumnName="img_path" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />

@@ -39,6 +39,7 @@
           <Property Name="expiration_date" Type="date" Nullable="false" />
           <Property Name="price" Type="smallint" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="img_path" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -95,6 +96,7 @@
           <Property Name="expiration_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="price" Type="Int16" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="img_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -146,6 +148,7 @@
           <EntitySetMapping Name="Tours">
             <EntityTypeMapping TypeName="TourAgencyModel.Tours">
               <MappingFragment StoreEntitySet="Tours">
+                <ScalarProperty Name="img_path" ColumnName="img_path" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />

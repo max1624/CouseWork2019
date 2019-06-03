@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using System.IO;
 
 namespace WebApplication1.Controllers
 {
@@ -16,7 +17,17 @@ namespace WebApplication1.Controllers
 
         private DbModel db = new DbModel();
 
-        // GET: Tours
+        [HttpGet]
+        public ActionResult ViewTour(int? tourId )
+        {
+            var tour = db.Tours.Find(tourId);
+            if (tour != null)
+            {
+                return View(tour);
+            }
+            return View("Index", "Home");
+        }
+
         [HttpGet]
         public ActionResult CreateTour()
         {
@@ -24,10 +35,14 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTour(Tours newTour)
+        public ActionResult CreateTour(Tours newTour, HttpPostedFileBase tour_img)
         {
+            string fileName = System.IO.Path.GetFileName(tour_img.FileName);
+            newTour.img_path = "/Files/" + fileName;
+            tour_img.SaveAs(Server.MapPath("~/Files/" + fileName));
             db.Tours.Add(newTour);
             db.SaveChanges();
+
             ViewBag.SuccessMessage = "Tour created successfuly";
             return View(newTour);
         }
@@ -42,16 +57,18 @@ namespace WebApplication1.Controllers
                 }
                 using (DbModel db = new DbModel())
                 {
-                    var postToDelete = db.Tours.Find(tourId);
-                    if (postToDelete != null)
+                    var tourToDelete = db.Tours.Find(tourId);
+                    if (tourToDelete != null)
                     {
-                        db.Tours.Remove(postToDelete);
+                        db.Tours.Remove(tourToDelete);
                         db.SaveChanges();
-                        ViewBag.SuccessMessage = "Post deleted successfully";
+                        ViewBag.SuccessMessage = "Tour deleted successfully";
                     }
                 }
             }
             return RedirectToAction("Index", "Home");
         }
+
+        
     }
 }

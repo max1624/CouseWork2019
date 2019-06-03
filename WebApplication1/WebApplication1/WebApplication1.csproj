@@ -134,6 +134,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -223,6 +224,8 @@
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Tours\CreateTour.cshtml" />
+    <Content Include="Views\Applications\CreateApplication.cshtml" />
+    <Content Include="Views\Tours\ViewTour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

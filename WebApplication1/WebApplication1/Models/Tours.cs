@@ -13,6 +13,7 @@ namespace WebApplication1.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel;
+    
 
     public partial class Tours
     {
@@ -45,5 +46,9 @@ namespace WebApplication1.Models
         [DisplayName("Description")]
         [Required(ErrorMessage = "This field is required")]
         public string description { get; set; }
+        
+        [DisplayName("Tour photo")]
+        public string img_path { get; set; }
+
     }
 }

@@ -34,6 +34,7 @@
     <Property Name="expiration_date" Type="date" Nullable="false" />
     <Property Name="price" Type="smallint" Nullable="false" />
     <Property Name="description" Type="text" Nullable="false" />
+    <Property Name="img_path" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
