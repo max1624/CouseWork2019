@@ -37,22 +37,22 @@ namespace WebApplication1.Controllers
 
             if(tourPrice == "0-300")
             {
-                var tours = db.Tours.Where(x => x.price < 300 && x.price > 0).ToList();
+                var tours = db.Tours.Where(x => x.price <= 300 && x.price > 0).ToList();
                 return View("Index", tours);
             }
             if(tourPrice == "300-500")
             {
-                var tours = db.Tours.Where(x => x.price < 500 && x.price > 300).ToList();
+                var tours = db.Tours.Where(x => x.price <= 500 && x.price >= 300).ToList();
                 return View("Index", tours);
             }
             if(tourPrice == "500-800")
             {
-                var tours = db.Tours.Where(x => x.price < 800 && x.price > 500).ToList();
+                var tours = db.Tours.Where(x => x.price <= 800 && x.price >= 500).ToList();
                 return View("Index", tours);
             }
             if(tourPrice == "800+")
             {
-                var tours = db.Tours.Where(x => x.price > 800).ToList();
+                var tours = db.Tours.Where(x => x.price >= 800).ToList();
                 return View("Index", tours);
             }
             return View("Index");

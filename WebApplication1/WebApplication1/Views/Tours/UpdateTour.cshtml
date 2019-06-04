@@ -1,16 +1,16 @@
 ﻿@model WebApplication1.Models.Tours
 @{
-    ViewBag.Title = "Create Tour";
+    ViewBag.Title = "Update Tour";
 }
 
-@if( Session["role_id"] == null || Session["role_id"].ToString() != "1")
+@if (Session["role_id"] == null || Session["role_id"].ToString() != "1")
 {
     throw new HttpException(404, "Not found");
 }
 
-<h2>Create Tour</h2>
+<h2>Update Tour</h2>
 
-@using (Html.BeginForm("CreateTour", "Tours", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UpdateTour", "Tours", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -22,6 +22,13 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-2">
             <label class="label-success">@ViewBag.SuccessMessage</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -44,7 +51,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.img_path, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="file" name="tour_img" accept=".png, .jpeg, jpg" />
+            <input type="file" name="tour_img" accept=".png, .jpeg, .jpg" />
         </div>
     </div>
 
@@ -76,7 +83,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create post" class="btn btn-default" />
+            <input type="submit" value="Update Tour" class="btn btn-default" />
         </div>
     </div>
 

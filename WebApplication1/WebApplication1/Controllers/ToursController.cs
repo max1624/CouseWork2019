@@ -67,6 +67,37 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public ActionResult UpdateTour(int? tourId)
+        {
+            var tourToDelete = db.Tours.Find(tourId);
+            return View(tourToDelete);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTour(Tours tour, HttpPostedFileBase tour_img)
+        {
+
+            var tourToUpdate = db.Tours.FirstOrDefault(x => x.Id == tour.Id);
+            tourToUpdate.name = tour.name;
+            tourToUpdate.hotel_id = tour.hotel_id;
+
+            if (tour_img != null)
+            {
+                string fileName = System.IO.Path.GetFileName(tour_img.FileName);
+                tour.img_path = "/Files/" + fileName;
+                tour_img.SaveAs(Server.MapPath("~/Files/" + fileName));
+                tourToUpdate.img_path = tour.img_path;
+            }
+
+            tourToUpdate.departure_city = tour.departure_city;
+            tourToUpdate.price = tour.price;
+            tourToUpdate.description = tour.description;
+            db.SaveChanges();
+
+            ViewBag.SuccessMessage = "Tour successfuly updated";
+            return View(tourToUpdate);
+        }
 
         
     }

@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
                 bool isEmpty = (tours.Count > 0) ? false : true;
                 if (isEmpty)
                 {
-                    ViewBag.NoResults = "No data";
+                    ViewBag.NoResults = "No results for your search.";
                 }
             }
             return View(tours);
