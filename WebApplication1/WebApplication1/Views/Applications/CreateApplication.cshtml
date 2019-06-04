@@ -1,13 +1,16 @@
 ﻿@model WebApplication1.Models.Applications
 
+
 @{
     ViewBag.Title = "Buy Tour";
 
 }
 
-<h2>Buy Tour</h2>
+
 @if (!(HttpContext.Current.Request.HttpMethod == "POST"))
 {
+    <h2>Buy Tour : <a href="@Url.Action("ViewTour", "Tours", new { tourId = ViewBag.tour.Id})"><h2>@ViewBag.tour.name</h2></a></h2>
+    <h5>Price: @ViewBag.tour.price $</h5>
     using (Html.BeginForm("CreateApplication", "Applications", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
@@ -25,7 +28,7 @@
 
             <div class="form-group">
                 <div class="col-md-10">
-                <input type="hidden" name="tourId" value="@ViewBag.tourId" />    
+                    <input type="hidden" name="tourId" value="@ViewBag.tourId" />
                 </div>
             </div>
             <div class="form-group">
@@ -57,7 +60,7 @@ else
 {
     <h2>Your application has been sent.</h2>
     <h3>We will contact you shortly</h3>
-    <img src="~/Files/img/application.png" style="align-content: center; width:200px; height:auto"/>
+    <img src="~/Files/img/application.png" style="align-content: center; width:200px; height:auto" />
 }
 
 @section Scripts {

@@ -16,27 +16,37 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult CreateApplication(int? tourId)
         {
-            if(tourId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            else
+            var tour = db.Tours.Where(x => x.Id == tourId).FirstOrDefault();
+            if (tour != null)
             {
                 Applications newApplication = new Applications();
                 ViewBag.tourId = (int)tourId;
+                ViewBag.tour = tour;
                 return View(newApplication);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
         [HttpPost]
         public ActionResult CreateApplication(Applications application, int tourId)
         {
-            //TODO: check if tour with this id exists
-            application.tour_id = tourId;
-            application.order_date = System.DateTime.Now;
-            db.Applications.Add(application);
-            db.SaveChanges();
-            ModelState.Clear();
-            return View("CreateApplication");
+            var tour = db.Tours.Where(x => x.Id == tourId).FirstOrDefault();
+            if(tour != null)
+            {
+                application.tour_id = tourId;
+                application.order_date = System.DateTime.Now;
+                db.Applications.Add(application);
+                db.SaveChanges();
+                ModelState.Clear();
+                return View("CreateApplication");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
         }
     }
 }

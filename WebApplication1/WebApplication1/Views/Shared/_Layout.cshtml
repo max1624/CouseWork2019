@@ -38,9 +38,9 @@
                     @{
                         if (Session["userId"] != null)
                         {
-                            <li style="float:right">>@Html.ActionLink("Log out", "Logout", "Users")</li>
+                            <li style="float:right">@Html.ActionLink("Log out", "Logout", "Users")</li>
                             <li>
-                                @using (Html.BeginForm("CreateApplication", "Applications", FormMethod.Post))
+                                @using (Html.BeginForm("Search", "Search", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                     <input type="text" name="search" placeholder="Search..." style="float: right;padding: 6px;border: none;margin-top: 8px;margin-right: 16px; font-size: 17px;" />
