@@ -1,0 +1,20 @@
+﻿@model List<WebApplication1.Models.Tours>
+@{
+    ViewBag.Title = "Search: " + ViewBag.search;
+}
+
+<h2>Search: @ViewBag.search</h2>
+
+<div class="row">
+
+    <hr />
+    <p>@ViewBag.NoResults</p>
+    @if (Model != null)
+    {
+        foreach (var tour in Model)
+        {
+            <p><h2><a href="@Url.Action("ViewTour", "Tours", new { tourId = @tour.Id })">@tour.name</a></h2></p>
+            <hr />
+        }
+    }
+</div>

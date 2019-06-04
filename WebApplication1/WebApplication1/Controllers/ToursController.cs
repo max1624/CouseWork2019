@@ -10,8 +10,6 @@ using System.IO;
 namespace WebApplication1.Controllers
 {
 
-
-
     public class ToursController : Controller
     {
 
@@ -68,6 +66,7 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
 
         
     }

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Buy Tour";
+
 }
 
 <h2>Buy Tour</h2>
@@ -22,6 +23,11 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="col-md-10">
+                <input type="hidden" name="tourId" value="@ViewBag.tourId" />    
+                </div>
+            </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.user_email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -49,7 +55,9 @@
 }
 else
 {
-
+    <h2>Your application has been sent.</h2>
+    <h3>We will contact you shortly</h3>
+    <img src="~/Files/img/application.png" style="align-content: center; width:200px; height:auto"/>
 }
 
 @section Scripts {

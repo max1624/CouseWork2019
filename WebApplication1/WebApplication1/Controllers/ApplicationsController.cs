@@ -8,8 +8,11 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    
     public class ApplicationsController : Controller
     {
+        private DbModel db = new DbModel();
+
         [HttpGet]
         public ActionResult CreateApplication(int? tourId)
         {
@@ -20,13 +23,20 @@ namespace WebApplication1.Controllers
             else
             {
                 Applications newApplication = new Applications();
+                ViewBag.tourId = (int)tourId;
                 return View(newApplication);
             }
         }
         [HttpPost]
-        public ActionResult CreateAppliction(int? tourId)
+        public ActionResult CreateApplication(Applications application, int tourId)
         {
-            return View();
+            //TODO: check if tour with this id exists
+            application.tour_id = tourId;
+            application.order_date = System.DateTime.Now;
+            db.Applications.Add(application);
+            db.SaveChanges();
+            ModelState.Clear();
+            return View("CreateApplication");
         }
     }
 }

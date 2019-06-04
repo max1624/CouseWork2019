@@ -15,14 +15,18 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     @{
+
                         if (Session["userId"] != null)
                         {
+                            <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         }
                         else
                         {
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+
                         }
                     }
                 </button>
@@ -30,21 +34,36 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    
+
                     @{
                         if (Session["userId"] != null)
                         {
-                            <li>@Html.ActionLink("Log out", "Logout", "Users")</li>
+                            <li style="float:right">>@Html.ActionLink("Log out", "Logout", "Users")</li>
+                            <li>
+                                @using (Html.BeginForm("CreateApplication", "Applications", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="text" name="search" placeholder="Search..." style="float: right;padding: 6px;border: none;margin-top: 8px;margin-right: 16px; font-size: 17px;" />
+                                }
+                            </li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Log in", "Login", "Users")</li>
-                            <li>@Html.ActionLink("Register", "Register", "Users")</li>
+                            <li style="float:right">@Html.ActionLink("Log in", "Login", "Users")</li>
+                            <li style="float:right">@Html.ActionLink("Register", "Register", "Users")</li>
+                            <li>
+                                @using (Html.BeginForm("Search", "Search", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="text" name="search" placeholder="Search..." style="float: right;padding: 6px;border: none;margin-top: 8px;margin-right: 16px; font-size: 17px;" />
+                                }
+                            </li>
                         }
                     }
                 </ul>
             </div>
         </div>
+
     </div>
     <div class="container body-content">
         @RenderBody()
